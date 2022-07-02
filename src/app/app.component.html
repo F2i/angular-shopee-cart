@@ -1,15 +1,15 @@
 
 <main>
   <header class="container">
-    <app-header></app-header>
+    <app-header [numberItems]="numberItems"></app-header>
   </header>
 
   <section class="container">
-    <app-product-list></app-product-list>
+    <app-product-list [products]="products" (onRemoveProduct)="removeProduct($event)" (onQuantityChange)="updateProductQuantity($event)"></app-product-list>
   </section>
 
   <section class="container">
     <app-promo-code></app-promo-code>
-    <app-cart-summary></app-cart-summary>
+    <app-cart-summary [cartSummaryInfo]="cartSummary"></app-cart-summary>
   </section>
 </main>

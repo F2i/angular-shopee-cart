@@ -4,7 +4,7 @@
           <div class="col left">
             <div class="thumbnail">
               <a href="#">
-                <img src="{{ product.thumbnail }}" alt="" />
+                <img [src]="product.thumbnail" [alt]="product.name" />
               </a>
             </div>
             <div class="detail">
@@ -18,10 +18,10 @@
   
           <div class="col right">
             <div class="quantity">
-              <input type="number" class="quantity" step="1" value="{{ product.quantity }}" />
+              <input #quantityInput type="number" class="quantity" step="1" [value]="product.quantity" (change)="quantityChange(quantityInput, product)" />
             </div>
   
-            <div class="remove">
+            <div class="remove" (click)="removeProduct(product)">
               <svg
                 version="1.1"
                 class="close"

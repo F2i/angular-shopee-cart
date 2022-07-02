@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Product } from './product.model';
 
 @Component({
   selector: 'app-product-list',
@@ -6,25 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products = [
-    {
-      name: 'Banh gio',
-      description: 'Description for product item number 1',
-      thumbnail: 'https://via.placeholder.com/200x150',
-      price: 6.99,
-      quantity: 7
-    },
-    {
-      name: 'Che dau xanh',
-      description: 'Description for product item number 2',
-      thumbnail: 'https://via.placeholder.com/200x150',
-      price: 2.99,
-      quantity: 3
-    }
-  ]
+  @Input() products: Product[] = [];
+  @Output() onRemoveProduct = new EventEmitter();
+  @Output() onQuantityChange = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  removeProduct(productInfo: any){
+    this.onRemoveProduct.emit(productInfo)
+  }
+
+  quantityChange(quantityInput: HTMLInputElement, productInfo: any){
+    this.onQuantityChange.emit({
+        quantityInput: quantityInput,
+        productInfo: productInfo
+      }
+    )
   }
 
 }
